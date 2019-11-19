@@ -22,7 +22,7 @@
 @endsection
 @section('content')
 <main class="main">
-   <h3 align="center">Import Excel File in Laravel</h3>
+   <h3 align="center">Import Excel File</h3>
     <br />
    @if(count($errors) > 0)
     <div class="alert alert-danger">
