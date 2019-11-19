@@ -79,7 +79,7 @@
             <td>{{ $row->M_UNIT_PRICE }}</td>
             <td align="right">{{ number_format($row->M_Cost_TOTAL,2) }}</td>
             <td align="center">{{ $row->ACTIVITY_CODE }}</td>
-            <td>{{ Func::get_date($row->created_at) }}</td>
+            <td align="center">{{ Func::get_date($row->created_at) }}</td>
            </tr>
          @endforeach
           </tbody>
