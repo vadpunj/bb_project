@@ -70,7 +70,7 @@
                         <input class="form-control" type="date" name="date">
                       </div>
                     </div>
-                    <label class="col-md-2 col-form-label">ศูนย์ต้นทุน</label>
+                    <label class="col-md-2 col-form-label">สาขาหน่วยงาน</label>
                     <div class="form-group col-sm-4">
                       <input class="form-control" type="text" name="source">
                     </div>
