@@ -12677,7 +12677,7 @@ canvas {
   flex-direction: column;
   padding: 0;
   color: #fff;
-  background: #fff;
+  background: #f5cea6;
 }
 
 .sidebar .sidebar-close {
@@ -13031,7 +13031,7 @@ canvas {
 }
 
 .sidebar .nav-dropdown.open .nav-link.disabled:hover {
-  color: #b3b3b3;
+  color: #000000;
 }
 
 .sidebar .nav-dropdown.open .nav-link.disabled:hover .nav-icon {
@@ -13205,7 +13205,7 @@ canvas {
   }
   .sidebar-minimized .sidebar .nav-item:hover .nav-link.disabled .nav-icon,
   .sidebar-minimized .sidebar .nav-item:hover .nav-link :disabled .nav-icon {
-    color: #73818f;
+    color: #FFFFFF;
   }
   .sidebar-minimized .sidebar section :not(.nav-dropdown-items) > .nav-item:last-child::after {
     display: block;

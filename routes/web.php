@@ -32,10 +32,19 @@ Route::group(['middleware' => ['auth']], function () {
   //     return view('readfile');
   //   })->name('upload');
   // Route::get('/export', 'InputController@export')->name('export');
+  Route::group(['prefix' => 'electric'], function(){
+    Route::get('/import_excel', 'ImportExcelController@index_electric')->name('eimport');
+    Route::post('/import_excel/import', 'ImportExcelController@import_electric');
 
-  Route::get('/import_excel', 'ImportExcelController@index')->name('import');
-  Route::post('/import_excel/import', 'ImportExcelController@import');
+    Route::get('/export_excel', 'ExportExcelController@index_electric')->name('eexport');
+    Route::post('/export_excel/export', 'ExportExcelController@export_electric');
+  });
+  Route::group(['prefix' => 'water'], function(){
+    Route::get('/import_excel', 'ImportExcelController@index_water')->name('wimport');
+    Route::post('/import_excel/import', 'ImportExcelController@import_water');
 
-  Route::get('/export_excel', 'ExportExcelController@index')->name('export');
-  Route::get('/export_excel/export', 'ExportExcelController@export');
+    Route::get('/export_excel', 'ExportExcelController@index_water')->name('wexport');
+    Route::post('/export_excel/export', 'ExportExcelController@export_water');
+  });
+
 });

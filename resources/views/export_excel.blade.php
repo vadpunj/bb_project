@@ -15,28 +15,19 @@
   <!-- Global site tag (gtag.js) - Google Analytics-->
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
   <link href="{{ asset('admin/css/jquery.dataTables.css') }}" rel="stylesheet">
-  <link href="{{ asset('admin/js/jquery-1.12.0.js') }}" rel="stylesheet">
+  <script src="{{ asset('admin/js/jquery-1.12.0.js') }}"></script>
 
   <style>
     .word {
       color: #fff !important;
     }
+    .color-side{
+      background-color: #FFB686 !important;
+    }
   </style>
 @endsection
 @section('content')
   <main class="main">
-   <h3 align="center">Import Excel File</h3>
-    <br />
-   @if(count($errors) > 0)
-    <div class="alert alert-danger">
-     Upload Validation Error<br><br>
-     <ul>
-      @foreach($errors->all() as $error)
-      <li>{{ $error }}</li>
-      @endforeach
-     </ul>
-    </div>
-   @endif
 
    @if($message = Session::get('success'))
    <div class="alert alert-success alert-block">
@@ -44,18 +35,18 @@
            <strong>{{ $message }}</strong>
    </div>
    @endif
-    {{ csrf_field() }}
-    <div class="form-group">
-      <a class="btn btn-primary" href="{{url('export_excel/export')}}">Export</a>
-    </div>
-
-   <br />
-   <div class="panel panel-default">
-    <div class="panel-heading">
-     <h3 class="panel-title">Electric Data</h3>
-    </div>
     <div class="panel-body">
       <div class="card-body">
+       <h3 align="center">Import Excel File</h3>
+        <div class="form-group">
+          <button class="btn btn-primary mb-1" type="button" data-toggle="modal" data-target="#myModal">Export</button>
+          {{--<a class="btn btn-primary" href="{{url($type.'/export_excel/export')}}">Export</a>--}}
+        </div>
+
+       <div class="panel panel-default">
+        <div class="panel-heading">
+         <h3 class="panel-title">{{ ucfirst($type).' Data'}}</h3>
+        </div>
         <table class="table table-responsive-sm table-bordered myTable">
           <thead>
               <th>TIME KEY</th>
@@ -88,7 +79,36 @@
      </div>
    </div>
  </main>
-@endsection
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+         <h4 class="modal-title">เลือกวันที่ Export ข้อมูล</h4>
+         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">×</span>
+         </button>
+        </div>
+        <form action="{{ url($type.'/export_excel/export') }}" method="post">
+          {{ csrf_field() }}
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Time Key</label>
+              <div class="col-md-9">
+                <input class="form-control" type="number" name="date" autocomplete="email">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+     <!-- /.modal-content-->
+    </div>
+   <!-- /.modal-dialog-->
+  </div>
+  @endsection
 
   @section('js')
   <script src="{{ asset('admin/node_modules/jquery/dist/jquery.min.js') }}"></script>

@@ -18,6 +18,9 @@
     .word {
       color: #fff !important;
     }
+    .color-side{
+      background-color: #FFB686 !important;
+    }
   </style>
 @endsection
 @section('content')
@@ -41,7 +44,7 @@
            <strong>{{ $message }}</strong>
    </div>
    @endif
-   <form method="post" enctype="multipart/form-data" action="{{ url('/import_excel/import') }}">
+   <form method="post" enctype="multipart/form-data" action="{{ url('water/import_excel/import') }}">
     {{ csrf_field() }}
     <div class="form-group">
      <table class="table">
@@ -91,8 +94,8 @@
       </table>
      </div>
     </div>
-   </div>
-</main>--}}
+   </div>--}}
+</main>
 @endsection
 
 @section('js')
