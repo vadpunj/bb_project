@@ -15,8 +15,7 @@ class ImportExcelController extends Controller
 {
     public function index_electric()
     {
-     $data = DB::table('customers')->orderBy('CustomerID', 'DESC')->get();
-     return view('import_excel', compact('data'));
+      return view('import_excel', ['type' => 'electric']);
     }
 
     public function import_electric(Request $request)
@@ -74,8 +73,7 @@ class ImportExcelController extends Controller
 
     public function index_water()
     {
-     $data = DB::table('customers')->orderBy('CustomerID', 'DESC')->get();
-     return view('import_excel', compact('data'));
+      return view('import_excel', ['type' => 'water']);
     }
 
     public function import_water(Request $request)

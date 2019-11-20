@@ -25,6 +25,12 @@
 @endsection
 @section('content')
 <main class="main">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#">หน้าแรก</a>
+    </li>
+    <li class="breadcrumb-item active">Import file {{ $type }}</li>
+  </ol>
    <h3 align="center">Import Excel File</h3>
     <br />
    @if(count($errors) > 0)
@@ -65,36 +71,6 @@
      </table>
     </div>
    </form>
-
-   {{--<div class="panel panel-default">
-    <div class="panel-heading">
-     <h3 class="panel-title card-body">Customer Data</h3>
-    </div>
-    <div class="panel-body">
-     <div class="card-body">
-      <table class="table table-bordered table-striped">
-       <tr>
-        <th>Customer Name</th>
-        <th>Gender</th>
-        <th>Address</th>
-        <th>City</th>
-        <th>Postal Code</th>
-        <th>Country</th>
-       </tr>
-       @foreach($data as $row)
-       <tr>
-        <td>{{ $row->CustomerName }}</td>
-        <td>{{ $row->Gender }}</td>
-        <td>{{ $row->Address }}</td>
-        <td>{{ $row->City }}</td>
-        <td>{{ $row->PostalCode }}</td>
-        <td>{{ $row->Country }}</td>
-       </tr>
-       @endforeach
-      </table>
-     </div>
-    </div>
-   </div>--}}
 </main>
 @endsection
 

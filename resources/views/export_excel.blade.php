@@ -28,7 +28,12 @@
 @endsection
 @section('content')
   <main class="main">
-
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">หน้าแรก</a>
+      </li>
+      <li class="breadcrumb-item active">Export file {{ $type }}</li>
+    </ol>
    @if($message = Session::get('success'))
    <div class="alert alert-success alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -37,7 +42,7 @@
    @endif
     <div class="panel-body">
       <div class="card-body">
-       <h3 align="center">Import Excel File</h3>
+       <h3 align="center">Export File</h3>
         <div class="form-group">
           <button class="btn btn-primary mb-1" type="button" data-toggle="modal" data-target="#myModal">Export</button>
           {{--<a class="btn btn-primary" href="{{url($type.'/export_excel/export')}}">Export</a>--}}

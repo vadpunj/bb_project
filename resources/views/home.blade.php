@@ -28,7 +28,7 @@
       <li class="breadcrumb-item">
         <a href="#">หน้าแรก</a>
       </li>
-      <li class="breadcrumb-item active">ดูข้อมูล</li>
+      <li class="breadcrumb-item active">ศูนย์ต้นทุน</li>
     </ol>
     <!-- end breadcrumb -->
   <div class="container-fluid">
