@@ -21,9 +21,6 @@
     .word {
       color: #fff !important;
     }
-    .color-side{
-      background-color: #FFB686 !important;
-    }
   </style>
 @endsection
 @section('content')

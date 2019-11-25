@@ -18,9 +18,6 @@
     .word {
       color: #fff !important;
     }
-    .color-side{
-      background-color: #FFB686 !important;
-    }
   </style>
 @endsection
 @section('content')
@@ -32,7 +29,7 @@
     <li class="breadcrumb-item active">Import file {{ $type }}</li>
   </ol>
    <h3 align="center">Import Excel File</h3>
-    <br />
+
    @if(count($errors) > 0)
     <div class="alert alert-danger">
      Upload Validation Error<br><br>
@@ -50,27 +47,54 @@
            <strong>{{ $message }}</strong>
    </div>
    @endif
-   <form method="post" enctype="multipart/form-data" action="{{ url('water/import_excel/import') }}">
+   <div class="card-body">
+   <form method="post" enctype="multipart/form-data" action="{{ url($type.'/import_excel/import') }}">
     {{ csrf_field() }}
-    <div class="form-group">
-     <table class="table">
-      <tr>
-       <td width="40%" align="right"><label>Select File for Upload</label></td>
-       <td width="30">
-        <input type="file" name="select_file" />
-       </td>
-       <td width="30%" align="left">
-        <input type="submit" name="upload" class="btn btn-primary" value="Upload">
-       </td>
-      </tr>
-      <tr>
-       <td width="40%" align="right"></td>
-       <td width="30"><span class="text-muted">.xls, .xslx</span></td>
-       <td width="30%" align="left"></td>
-      </tr>
-     </table>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="date-input">Time Key</label>
+      <div class="col-md-4">
+        <input class="form-control" name="time_key" type="text" required>
+
+      </div>
     </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="date-input">Select File</label>
+      <div class="col-md-4">
+        <input id="file-input" type="file" name="select_file"><span class="text-muted">.xls, .xslx</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <input type="submit" name="upload" class="btn btn-primary" value="Submit">
+    </div><br>
    </form>
+   <div class="card-header word" style="width: 50%;"> ข้อมูลเดือนล่าสุดในระบบ</div>
+   <table class="table table-responsive-sm table-sm" style="width: 50%;">
+     <thead>
+       <tr>
+         <th>Time Key</th>
+         <th>M Unit</th>
+         <th>M Unit Price</th>
+         <th>M Cost Total</th>
+       </tr>
+     </thead>
+     @if(!empty($data))
+     <tbody>
+       <tr>
+         <td>{{ $data->TIME_KEY}}</td>
+         <td>{{ number_format($data->M_UNIT) }}</td>
+         <td>{{ number_format($data->M_UNIT_PRICE,2) }}</td>
+         <td>{{ number_format($data->M_Cost_TOTAL,2) }}</td>
+       </tr>
+     </tbody>
+     @else
+     <tbody>
+       <tr>
+         <td colspan="4">{{ 'ไม่มีข้อมูล' }}</td>
+       </tr>
+     </tbody>
+     @endif
+   </table>
+  </div>
 </main>
 @endsection
 

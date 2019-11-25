@@ -15,15 +15,23 @@ class ImportExcelController extends Controller
 {
     public function index_electric()
     {
-      return view('import_excel', ['type' => 'electric']);
+      $data = Electric::groupBy('TIME_KEY')
+        ->selectRaw('TIME_KEY,sum(M_UNIT) as M_UNIT, sum(M_UNIT_PRICE) as M_UNIT_PRICE,sum(M_Cost_TOTAL) as M_Cost_TOTAL')
+        ->orderBy('TIME_KEY','DESC')
+        ->first();
+      return view('import_excel', ['type' => 'electric','data' => $data]);
     }
 
     public function import_electric(Request $request)
     {
       set_time_limit(0);
-     $this->validate($request, [
-      'select_file'  => 'required|mimes:xls,xlsx'
-     ]);
+      $this->validate($request, [
+        'select_file'  => 'required|mimes:xls,xlsx',
+        'time_key' => 'required|numeric'
+      ]);
+      // delete ก่อน insert
+      $delete_data = Electric::where('TIME_KEY',$request->time_key)->delete();
+
      $path = $request->file('select_file')->getRealPath();
      $name = $request->file('select_file')->getClientOriginalName();
      $pathreal = Storage::disk('log')->getAdapter()->getPathPrefix();
@@ -60,8 +68,8 @@ class ImportExcelController extends Controller
           $insert->COST_CENTER = $insert_data[$j++]['COST_CENTER'];
           $insert->METER_ID = $insert_data[$j++]['METER_ID'];
           $insert->M_UNIT = $insert_data[$j++]['M_UNIT'];
-          $insert->M_UNIT_PRICE = $insert_data[$j++]['M_UNIT_PRICE'];
-          $insert->M_Cost_TOTAL = $insert_data[$j++]['M_Cost_TOTAL'];
+          $insert->M_UNIT_PRICE = round($insert_data[$j++]['M_UNIT_PRICE'],2);
+          $insert->M_Cost_TOTAL = round($insert_data[$j++]['M_Cost_TOTAL'],2);
           $insert->ACTIVITY_CODE = $insert_data[$j]['ACTIVITY_CODE'];
           $insert->save();
         }
@@ -73,15 +81,23 @@ class ImportExcelController extends Controller
 
     public function index_water()
     {
-      return view('import_excel', ['type' => 'water']);
+      $data = Water::groupBy('TIME_KEY')
+        ->selectRaw('TIME_KEY,sum(M_UNIT) as M_UNIT, sum(M_UNIT_PRICE) as M_UNIT_PRICE,sum(M_Cost_TOTAL) as M_Cost_TOTAL')
+        ->orderBy('TIME_KEY','DESC')
+        ->first();
+      return view('import_excel', ['type' => 'water','data' => $data]);
     }
 
     public function import_water(Request $request)
     {
       set_time_limit(0);
      $this->validate($request, [
-      'select_file'  => 'required|mimes:xls,xlsx'
+      'select_file'  => 'required|mimes:xls,xlsx',
+      'time_key' => 'required|numeric'
      ]);
+
+     $delete_data = Water::where('TIME_KEY',$request->time_key)->delete();
+
      $path = $request->file('select_file')->getRealPath();
      $name = $request->file('select_file')->getClientOriginalName();
      $pathreal = Storage::disk('log')->getAdapter()->getPathPrefix();
@@ -117,8 +133,8 @@ class ImportExcelController extends Controller
           $insert->COST_CENTER = $insert_data[$j++]['COST_CENTER'];
           $insert->METER_ID = $insert_data[$j++]['METER_ID'];
           $insert->M_UNIT = $insert_data[$j++]['M_UNIT'];
-          $insert->M_UNIT_PRICE = $insert_data[$j++]['M_UNIT_PRICE'];
-          $insert->M_Cost_TOTAL = $insert_data[$j++]['M_Cost_TOTAL'];
+          $insert->M_UNIT_PRICE = round($insert_data[$j++]['M_UNIT_PRICE'],2);
+          $insert->M_Cost_TOTAL = round($insert_data[$j++]['M_Cost_TOTAL'],2);
           $insert->ACTIVITY_CODE = $insert_data[$j]['ACTIVITY_CODE'];
           $insert->save();
         }

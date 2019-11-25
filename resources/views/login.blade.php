@@ -39,26 +39,39 @@
       // Bootstrap ID
       gtag('config', 'UA-118965717-5');
     </script>
+    <style>
+
+      .shadow {
+        padding: 10px !important;
+        box-shadow: 5px 10px 18px #333333 !important;
+      }
+    </style>
+
   </head>
   <body class="app flex-row align-items-center">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card-group">
-            <div class="card p-4">
+            <div class="card p-4 shadow">
               <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="card-body">
+                  @if(session()->has('message'))
+                      <div class="alert alert-danger">
+                          {{ session()->get('message') }}
+                      </div>
+                  @endif
                   <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
+                  <p class="text-muted">**ใช้รหัสผ่านเดียวกับ Email**</p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="icon-user"></i>
                       </span>
                     </div>
-                    <input class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" type="text" required autocomplete="email" placeholder="E-mail">
-                    @error('email')
+                    <input class="form-control @error('emp_id') is-invalid @enderror" name="emp_id" value="{{ old('emp_id') }}" type="text" required placeholder="รหัสพนักงาน">
+                    @error('emp_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -70,7 +83,7 @@
                         <i class="icon-lock"></i>
                       </span>
                     </div>
-                    <input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" required autocomplete="current-password">
+                    <input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="รหัสผ่าน" name="password" required autocomplete="current-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
