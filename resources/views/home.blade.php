@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>Home page</title>
 @endsection
 
@@ -46,34 +47,35 @@
             <form class="form-horizontal" action="route('insert')" method="post">
               <div class="card-body">
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">วันที่ผ่านรายการ</label>
-                      <div class="form-group col-sm-4">
-                        <div class="input-group">
-                          <span class="input-group-text">
-                            <i class="fa fa-calendar"></i>
-                          </span>
-                          <input class="form-control" type="date" name="date">
-                        </div>
-                      </div>
-                    <label class="col-md-2 col-form-label">ศูนย์ต้นทุน</label>
-                    <div class="form-group col-sm-4">
-                      <input class="form-control" type="text" name="source">
-                    </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-2 col-form-label">วันที่ผ่านรายการ</label>
+                  <label class="col-md-2 col-form-label">วันททำรายการ</label>
                     <div class="form-group col-sm-4">
                       <div class="input-group">
                         <span class="input-group-text">
                           <i class="fa fa-calendar"></i>
                         </span>
-                        <input class="form-control" type="date" name="date">
+                        <input class="form-control" type="date" name="start_date">
                       </div>
                     </div>
-                    <label class="col-md-2 col-form-label">สาขาหน่วยงาน</label>
-                    <div class="form-group col-sm-4">
-                      <input class="form-control" type="text" name="source">
-                    </div>
+                    <label class="col-md-2 col-form-label">ถึง</label>
+                      <div class="form-group col-sm-4">
+                        <div class="input-group">
+                          <span class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                          </span>
+                          <input class="form-control" type="date" name="end_date">
+                        </div>
+                      </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-2 col-form-label">ศูนย์ต้นทุน</label>
+                  <div class="form-group col-sm-4">
+                    <input class="form-control" type="text" name="source">
+                  </div>
+                  <label class="col-md-2 col-form-label">สาขาหน่วยงาน</label>
+                  <div class="form-group col-sm-4">
+                    <input class="form-control" type="text" id="branch" name="branch" onchange="myfunc()">
+                    <p id="demo"></p>
+                  </div>
                 </div>
               </div>
               <div class="col-md-2 form-group form-actions">
@@ -89,7 +91,32 @@
 @endsection
 
 @section('js')
-  <script src="{{ asset('admin/node_modules/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/node_modules/jquery/dist/jquery.min.js') }}"></script>
+  <script>
+  function myfunc(){
+    var x = document.getElementById("branch").value;
+    console.log(x);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/find/branch',
+        data: {data:x},
+        dataType: "json",
+        success: function (json) {
+          document.getElementById("demo").innerHTML = json.success;
+            console.log(json.success);
+        },
+        error: function (e) {
+            console.log(e.message);
+        }
+    });
+  }
+
+  </script>
   <script src="{{ asset('admin/node_modules/popper.js/dist/umd/popper.min.js') }}"></script>
   <script src="{{ asset('admin/node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('admin/node_modules/pace-progress/pace.min.js') }}"></script>

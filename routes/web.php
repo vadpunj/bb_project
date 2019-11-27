@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('/home', 'InputController@post_data')->name('insert');
   // Route::get('/home/insert', 'InputController@test_input')->name('insert');
   Route::get('/list', 'InputController@list_data')->name('list');
+  Route::post('/find/branch', 'InputController@ajax_data');
   // Route::get('/upload/readfile',function(){
   //     return view('readfile');
   //   })->name('upload');

@@ -70,7 +70,7 @@
                         <i class="icon-user"></i>
                       </span>
                     </div>
-                    <input class="form-control @error('emp_id') is-invalid @enderror" name="emp_id" value="{{ old('emp_id') }}" type="text" required placeholder="รหัสพนักงาน">
+                    <input class="form-control @error('emp_id') is-invalid @enderror" name="emp_id" value="{{ old('emp_id') }}" type="text" required placeholder="รหัสพนักงาน 8 หลัก">
                     @error('emp_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

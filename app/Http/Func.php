@@ -15,7 +15,7 @@ class Func{
     return $day.' '.$month[$m].' '.$year;
 
   }
-
+  
 }
 
  ?>
