@@ -55,7 +55,7 @@ class InputController extends Controller
       if(!empty($data)){
         return response()->json(['success' => $data->branch_name]);
       }else{
-        return response()->json(['success' => 'ไม่มีสาขานี้']);
+        return response()->json(['success' => 'ไม่มีสาขาที่กรอก']);
       }
 
     }

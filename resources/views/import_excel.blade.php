@@ -89,7 +89,7 @@
      @else
      <tbody>
        <tr>
-         <td colspan="4">{{ 'ไม่มีข้อมูล' }}</td>
+         <td colspan="4" align="center">{{ 'ไม่มีข้อมูล' }}</td>
        </tr>
      </tbody>
      @endif
