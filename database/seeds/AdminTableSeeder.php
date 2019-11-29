@@ -14,21 +14,21 @@ class AdminTableSeeder extends Seeder
       DB::table('users')->insert([
         [
           'name' => 'phatsirin',
-          'email' => 'phatsirin.s@cattelecom.com',
+          'emp_id' => '01000583',
           'type' => 1,
           'created_at' => date('Y-m-d H:i:s'),
           'updated_at' => date('Y-m-d H:i:s')
         ],
         [
           'name' => 'dumkerng',
-          'email' => 'dumkerng.m@cattelecom.com',
+          'emp_id' => '00368195',
           'type' => 1,
           'created_at' => date('Y-m-d H:i:s'),
           'updated_at' => date('Y-m-d H:i:s')
         ],
         [
           'name' => 'panicha',
-          'email' => 'panicha.s@cattelecom.com',
+          'emp_id' => '01000554',
           'type' => 1,
           'created_at' => date('Y-m-d H:i:s'),
           'updated_at' => date('Y-m-d H:i:s')

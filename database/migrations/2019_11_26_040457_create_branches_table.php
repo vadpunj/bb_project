@@ -17,9 +17,6 @@ class CreateBranchesTable extends Migration
           $table->bigIncrements('id');
           $table->integer('branch_id');
           $table->char('branch_name');
-          $table->char('source');
-          $table->date('start_date');
-          $table->date('end_date');
           $table->timestamps();
         });
     }

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Imports\FileImport;
 use App\Exports\FileExport;
-use App\People;
+use Illuminate\Support\Facades\Auth;
+use App\Transaction;
 use App\Branch;
 use DB;
 use Excel;
@@ -14,40 +15,38 @@ use Func;
 
 class InputController extends Controller
 {
-    public function get_source(Request $request)
+    public function get_source()
     {
 
       return view('home');
 
     }
 
-    public function post_data()
+    public function post_data(Request $request)
     {
-      $input1 = $request->input1;
-      $input2 = $request->input2;
-      $input3 = $request->date;
+
+      $start_date = $request->start_date;
+      $end_date = $request->end_date;
+      $source = $request->source;
+      $branch = $request->branch;
 
       $this->validate($request,[
          'start_date'=>'required|date',
          'end_date'=>'required|date',
-         'source' => 'required|numeric',
+         'source' => 'required',
          'branch' => 'required|numeric'
       ]);
 
 
-      $people = new People;
-      $people->username = $input1;
-      $people->password = md5($input2);
-      $people->birthday = $input3;
+      $people = new Transaction;
+      $people->branch_id = $branch;
+      $people->source = $source;
+      $people->start_date = $start_date;
+      $people->end_date = $end_date;
+      $people->user = Auth::user()->emp_id;
       $save = $people->save();
-      if(!$save){
-        $massage = 'การบันทึกผิดพลาด';
-        $class = 'danger';
-      }else{
-        $massage = 'บันทึกเรียบร้อย';
-        $class = 'success';
-      }
-      return view('home', ['message' => $massage ,'class' => $class]);
+
+      return view('home');
     }
     public function ajax_data()
     {

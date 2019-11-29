@@ -44,16 +44,22 @@
               </div>
             @endif
           <i class="fa fa-align-justify"></i> กรอกศูนย์ต้นทุน</div>
-            <form class="form-horizontal" action="route('insert')" method="post">
+            <form class="form-horizontal" action="{{ route('insert') }}" method="post">
+              @csrf
               <div class="card-body">
                 <div class="form-group row">
-                  <label class="col-md-2 col-form-label">วันททำรายการ</label>
+                  <label class="col-md-2 col-form-label">วันทำรายการ</label>
                     <div class="form-group col-sm-4">
                       <div class="input-group">
                         <span class="input-group-text">
                           <i class="fa fa-calendar"></i>
                         </span>
-                        <input class="form-control" type="date" name="start_date">
+                        <input class="form-control @error('start_date') is-invalid @enderror" type="date" name="start_date">
+                        @error('start_date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                       </div>
                     </div>
                     <label class="col-md-2 col-form-label">ถึง</label>
@@ -62,18 +68,33 @@
                           <span class="input-group-text">
                             <i class="fa fa-calendar"></i>
                           </span>
-                          <input class="form-control" type="date" name="end_date">
+                          <input class="form-control @error('end_date') is-invalid @enderror" type="date" name="end_date">
+                          @error('end_date')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
                         </div>
                       </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-2 col-form-label">ศูนย์ต้นทุน</label>
                   <div class="form-group col-sm-4">
-                    <input class="form-control" type="text" name="source">
+                    <input class="form-control @error('source') is-invalid @enderror" type="text" name="source">
+                    @error('source')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                   </div>
                   <label class="col-md-2 col-form-label">สาขาหน่วยงาน</label>
                   <div class="form-group col-sm-4">
-                    <input class="form-control" type="text" id="branch" name="branch" onchange="myfunc()">
+                    <input class="form-control @error('branch') is-invalid @enderror" type="text" id="branch" name="branch" onchange="myfunc()">
+                    @error('branch')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     <p id="demo"></p>
                   </div>
                 </div>
@@ -95,7 +116,6 @@
   <script>
   function myfunc(){
     var x = document.getElementById("branch").value;
-    console.log(x);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -108,7 +128,6 @@
         dataType: "json",
         success: function (json) {
           document.getElementById("demo").innerHTML = json.success;
-            console.log(json.success);
         },
         error: function (e) {
             console.log(e.message);
