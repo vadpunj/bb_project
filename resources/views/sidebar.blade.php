@@ -47,12 +47,12 @@
         <a class="nav-link {{ (request()->is('elect/export')) ? 'active' : '' }}" href="{{ route('eexport') }}">
           <i class="nav-icon icon-doc"></i> Export files</a>
       </li>--}}
-      {{--@if(Auth::user()->type ==1)
+      @if(Auth::user()->type ==1)
       <li class="nav-item">
         <a class="nav-link" target="_blank" href="{{ route('register') }}" >
           <i class="nav-icon icon-doc"></i> Register</a>
       </li>
-      @endif--}}
+      @endif
     </ul>
   </nav>
 </div>

@@ -18,13 +18,11 @@ class UserController extends Controller
     {
       $this->validate($request, [
         'name' => 'required|min:4',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:6|confirmed'
+        'emp_id' => 'required|numeric|unique:users'
       ]);
       User::create([
         'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password)
+        'emp_id' => $request->emp_id
       ]);
       return redirect()->back();
     }

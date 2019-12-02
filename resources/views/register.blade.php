@@ -58,48 +58,30 @@
                   </div>
                   <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Name" name="name" value="{{ old('name') }}" required autocomplete="name">
                   @if (session()->has('notification'))
-                      <div class="notification">
-                          {!! session('notification') !!}
-                      </div>
+                    <div class="notification">
+                        {!! session('notification') !!}
+                    </div>
                   @endif
                   @error('name')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">@</span>
-                  </div>
-                  <input class="form-control @error('email') is-invalid @enderror" type="text" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email">
-                  @error('email')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                   @enderror
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="icon-lock"></i>
+                      <i class="icon-people"></i>
                     </span>
                   </div>
-                  <input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" required autocomplete="new-password">
-                  @error('password')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
+                  <input class="form-control @error('emp_id') is-invalid @enderror" type="text" placeholder="Employee ID" name="emp_id" value="{{ old('emp_id') }}" required autocomplete="emp_id">
+                  @error('emp_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                   @enderror
                 </div>
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="icon-lock"></i>
-                    </span>
-                  </div>
-                  <input class="form-control" type="password" placeholder="Confirm password" name="password_confirmation" required autocomplete="new-password">
-                </div>
+
                 <button class="btn btn-block btn-success" type="submit">Create Account</button>
               </div>
             </form>
